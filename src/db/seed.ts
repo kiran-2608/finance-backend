@@ -78,4 +78,8 @@ function seed() {
   console.log('  viewer@demo.com  / viewer123');
 }
 
-seed();
+export { seed };
+
+if (require.main === module) {
+  seed();
+}
