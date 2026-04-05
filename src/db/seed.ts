@@ -78,8 +78,20 @@ function seed() {
   console.log('  viewer@demo.com  / viewer123');
 }
 
+export function seedIfEmpty() {
+  const existing = db.prepare('SELECT COUNT(*) as count FROM users').get() as { count: number };
+  
+  if (existing.count === 0) {
+    console.log('📦 Empty database detected — auto-seeding...');
+    seed();
+  } else {
+    console.log(`✅ Database already has ${existing.count} users — skipping seed`);
+  }
+}
+
 export { seed };
 
 if (require.main === module) {
   seed();
 }
+

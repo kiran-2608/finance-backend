@@ -3,6 +3,7 @@ import authRoutes      from './routes/auth.routes';
 import userRoutes      from './routes/user.routes';
 import recordRoutes    from './routes/record.routes';
 import dashboardRoutes from './routes/dashboard.routes';
+import { seedIfEmpty } from './db/seed';
 
 const app  = express();
 const PORT = process.env.PORT ?? 3000;
@@ -58,7 +59,9 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 app.listen(PORT, () => {
   console.log(`\n🚀 Finance Backend API running on http://localhost:${PORT}`);
   console.log(`   Environment : ${process.env.NODE_ENV ?? 'development'}`);
-  console.log(`   Run seed    : npm run seed\n`);
+
+  seedIfEmpty();
 });
+
 
 export default app;
